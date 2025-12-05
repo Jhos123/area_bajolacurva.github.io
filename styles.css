@@ -1,0 +1,587 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: #0a0a0f;
+    color: #00ffff;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Fondo animado */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(ellipse at 20% 50%, rgba(139, 0, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 50%, rgba(0, 255, 255, 0.15) 0%, transparent 50%);
+    z-index: -1;
+    animation: pulse 8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 30px 0;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+h1 {
+    font-size: 2.5em;
+    font-weight: 900;
+    background: linear-gradient(90deg, #00ffff, #ff00ff, #00ffff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient 3s linear infinite;
+    text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+.subtitle {
+    color: #8b00ff;
+    font-size: 0.9em;
+    margin-top: 10px;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px rgba(139, 0, 255, 0.6);
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* Panel izquierdo */
+.panel-left {
+    background: rgba(15, 15, 25, 0.8);
+    border: 2px solid #00ffff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.4),
+        inset 0 0 20px rgba(0, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ff00ff;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #00ffff;
+    border-radius: 8px;
+    color: #00ffff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #ff00ff;
+    box-shadow: 
+        0 0 20px rgba(255, 0, 255, 0.6),
+        inset 0 0 10px rgba(255, 0, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+select {
+    cursor: pointer;
+}
+
+select option {
+    background: #0a0a0f;
+    color: #00ffff;
+}
+
+/* Botón calcular */
+.btn-calcular {
+    position: relative;
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(45deg, #00ffff, #ff00ff);
+    border: none;
+    border-radius: 10px;
+    color: #0a0a0f;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1em;
+    font-weight: 900;
+    letter-spacing: 3px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+    margin-top: 10px;
+}
+
+.btn-calcular:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 40px rgba(255, 0, 255, 0.8);
+}
+
+.btn-calcular:active {
+    transform: translateY(0);
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.5s ease;
+}
+
+.btn-calcular:hover .btn-glow {
+    transform: translate(-50%, -50%) scale(2);
+}
+
+/* Resultado */
+.resultado-box {
+    margin-top: 30px;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #8b00ff;
+    border-radius: 10px;
+    box-shadow: 
+        0 0 20px rgba(139, 0, 255, 0.4),
+        inset 0 0 20px rgba(139, 0, 255, 0.1);
+}
+
+.resultado-label {
+    color: #ff00ff;
+    font-size: 0.85em;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
+}
+
+.resultado-valor {
+    font-size: 2em;
+    font-weight: 900;
+    color: #00ffff;
+    font-family: 'Share Tech Mono', monospace;
+    text-align: center;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+    padding: 10px;
+}
+
+.error-msg {
+    color: #ff0066;
+    font-size: 0.9em;
+    margin-top: 10px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 0, 102, 0.6);
+}
+
+/* Panel derecho */
+.panel-right {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.grafica-container {
+    background: rgba(15, 15, 25, 0.9);
+    border: 2px solid #ff00ff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 
+        0 0 20px rgba(255, 0, 255, 0.4),
+        inset 0 0 20px rgba(255, 0, 255, 0.05);
+    backdrop-filter: blur(10px);
+    height: 500px;
+}
+
+#grafica {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Documentación */
+.documentacion {
+    background: rgba(15, 15, 25, 0.9);
+    border: 2px solid #00ffff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.4),
+        inset 0 0 20px rgba(0, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.documentacion h3 {
+    color: #ff00ff;
+    font-size: 1.2em;
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
+    border-bottom: 2px solid #ff00ff;
+    padding-bottom: 10px;
+}
+
+.metodo-info {
+    color: #00ffff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95em;
+    line-height: 1.8;
+}
+
+.metodo-info p {
+    margin-bottom: 10px;
+}
+
+.metodo-info strong {
+    color: #ff00ff;
+    text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .panel-left {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    
+    .subtitle {
+        font-size: 0.8em;
+    }
+    
+    .grafica-container {
+        height: 350px;
+    }
+}
+/* Documentación Expandida */
+.documentacion-expandida {
+    background: rgba(15, 15, 25, 0.95);
+    border: 2px solid #00ffff;
+    border-radius: 15px;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.4),
+        inset 0 0 20px rgba(0, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    max-height: 600px;
+}
+
+.doc-header {
+    background: linear-gradient(135deg, #00ffff, #ff00ff);
+    padding: 15px 25px;
+    border-bottom: 2px solid #ff00ff;
+}
+
+.doc-header h2 {
+    color: #0a0a0f;
+    font-size: 1.3em;
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin: 0;
+}
+
+.doc-content {
+    padding: 25px;
+    max-height: 535px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Scrollbar personalizado */
+.doc-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.doc-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.doc-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00ffff, #ff00ff);
+    border-radius: 10px;
+}
+
+.doc-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #ff00ff, #00ffff);
+}
+
+.doc-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.doc-section:last-child {
+    border-bottom: none;
+}
+
+.doc-section h3 {
+    color: #ff00ff;
+    font-size: 1.1em;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 15px rgba(255, 0, 255, 0.6);
+}
+
+/* Información del gráfico */
+.grafico-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.grafico-info li {
+    padding: 8px 0;
+    font-family: 'Share Tech Mono', monospace;
+    color: #00ffff;
+}
+
+.color-cyan {
+    color: #00ffff;
+    font-size: 1.5em;
+    text-shadow: 0 0 10px #00ffff;
+}
+
+.color-magenta {
+    color: #ff00ff;
+    font-size: 1.5em;
+    text-shadow: 0 0 10px #ff00ff;
+}
+
+#graficoDetalle {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(0, 255, 255, 0.05);
+    border-left: 3px solid #00ffff;
+    font-family: 'Share Tech Mono', monospace;
+    line-height: 1.6;
+}
+
+/* Ejemplos prácticos */
+.ejemplos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.ejemplo-card {
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid #8b00ff;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ejemplo-card:hover {
+    border-color: #ff00ff;
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+    transform: translateY(-3px);
+}
+
+.ejemplo-titulo {
+    color: #ff00ff;
+    font-weight: 700;
+    font-size: 0.9em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ejemplo-formula {
+    color: #00ffff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1em;
+    margin: 8px 0;
+}
+
+.ejemplo-intervalo {
+    color: #8b00ff;
+    font-size: 0.85em;
+    margin: 5px 0;
+}
+
+.ejemplo-metodo {
+    color: #00ffff;
+    font-size: 0.8em;
+    margin-top: 8px;
+    text-align: right;
+    opacity: 0.7;
+}
+
+/* Fórmulas */
+.formula-container {
+    margin-top: 15px;
+}
+
+.formula-box {
+    background: rgba(0, 0, 0, 0.6);
+    border-left: 4px solid #ff00ff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.formula-box h4 {
+    color: #ff00ff;
+    font-size: 0.95em;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.formula {
+    color: #00ffff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9em;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.formula-desc {
+    color: #8b00ff;
+    font-size: 0.85em;
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* Sintaxis */
+.sintaxis-tabla {
+    margin-top: 15px;
+}
+
+.sintaxis-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.4);
+    border-left: 3px solid #00ffff;
+    margin-bottom: 8px;
+    border-radius: 5px;
+}
+
+.sintaxis-op {
+    color: #ff00ff;
+    font-weight: 700;
+    font-size: 0.9em;
+}
+
+.sintaxis-ejemplo {
+    color: #00ffff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9em;
+}
+
+/* Tabla comparación */
+.comparacion-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+.comparacion-tabla thead {
+    background: rgba(255, 0, 255, 0.2);
+}
+
+.comparacion-tabla th {
+    color: #ff00ff;
+    padding: 12px;
+    text-align: left;
+    font-weight: 700;
+    border-bottom: 2px solid #ff00ff;
+}
+
+.comparacion-tabla td {
+    color: #00ffff;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.comparacion-tabla tbody tr:hover {
+    background: rgba(0, 255, 255, 0.05);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .documentacion-expandida {
+        max-height: 500px;
+    }
+    
+    .doc-content {
+        max-height: 435px;
+    }
+}
+
+@media (max-width: 768px) {
+    .ejemplos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .comparacion-tabla {
+        font-size: 0.8em;
+    }
+}

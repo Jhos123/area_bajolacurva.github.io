@@ -1,0 +1,101 @@
+✅ EJEMPLO REAL DE EJECUCIÓN (Agronomía – Crecimiento lineal)
+👨‍🌾 Caso real:
+
+Un agrónomo quiere saber cuánto crecerá una planta en 20 días.
+Modelo asumido:
+
+𝑓
+(
+𝑡
+)
+=
+1.2
++
+0.8
+𝑡
+f(t)=1.2+0.8t
+
+(donde la función representa la tasa de crecimiento diaria en cm/día)
+
+Tu objetivo es encontrar:
+
+∫
+0
+20
+𝑓
+(
+𝑡
+)
+ 
+𝑑
+𝑡
+∫
+0
+20
+	​
+
+f(t)dt
+
+que representa la altura total acumulada durante 20 días.
+
+🔢 PASO 1: Llenas la calculadora
+
+En la calculadora (la que tendrá Claude cuando la genere), colocas:
+
+Campo	Valor
+Función f(x)	1.2 + 0.8*x
+Límite inferior (a)	0
+Límite superior (b)	20
+Número de subdivisiones (n)	10
+Método	Simpson 1/3 (por ejemplo)
+▶️ PASO 2: Haces clic en “Calcular”
+
+La calculadora:
+
+evalúa la función,
+
+divide el intervalo,
+
+aplica Simpson 1/3,
+
+grafica la curva,
+
+muestra los trapecios o parábolas del método,
+
+entrega el valor numérico de la integral.
+
+📊 PASO 3: Resultado típico que mostrará
+
+Por ejemplo:
+
+Resultado aproximado:
+
+∫
+0
+20
+(
+1.2
++
+0.8
+𝑥
+)
+𝑑
+𝑥
+≈
+176
+ 
+cm
+∫
+0
+20
+	​
+
+(1.2+0.8x)dx≈176cm
+
+La gráfica mostrará:
+
+la curva de la función (una línea recta ascendente),
+
+las subdivisiones del método elegido,
+
+rellenos mostrando el área aproximada.

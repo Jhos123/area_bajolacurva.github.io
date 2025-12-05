@@ -1,0 +1,81 @@
+Necesito una calculadora numérica de integración, en una sola pantalla, que permita calcular el área bajo la curva utilizando los siguientes métodos:
+
+Trapecio
+
+Simpson 1/3
+
+Simpson 3/8
+
+La calculadora debe permitir:
+
+Ingresar la función f(x) como texto.
+
+Ingresar el intervalo a y b.
+
+Ingresar n (número de subdivisiones).
+
+Elegir el método numérico mediante un selector.
+
+Graficar la curva y las subdivisiones según el método elegido.
+
+Mostrar el resultado numérico debajo.
+
+Todo debe mostrarse en una sola página, sin menús adicionales.
+
+No quiero plantillas prellenadas, no quiero ejemplos predeterminados ni pantallas separadas.
+Yo ingresaré los datos manualmente.
+
+✔️ INTERFAZ QUE QUIERO
+
+La interfaz debe ser:
+
+Minimalista
+
+Estilo calculadora científica moderna
+
+Limpia y sin secciones por separado
+
+Inputs a la izquierda, gráfica y documentación a la derecha
+
+Botón de Calcular / Graficar debajo de los inputs
+
+La gráfica aparece a la derecha
+
+Un área de “documentación” simple también a la derecha (por ejemplo un recuadro con texto explicativo)
+
+No quiero menús, categorías, ni botones de cargar datos.
+Solo:
+
+Inputs
+
+Selector de método
+
+Botón de calcular
+
+Gráfica
+
+Pequeña documentación a un lado
+
+✔️ LIBRERÍAS PERMITIDAS
+
+Debes usar únicamente:
+
+Chart.js para graficar
+
+math.js para evaluar la función escrita por el usuario como texto
+
+Todo el JavaScript debe ir dentro del mismo archivo HTML, dentro de <script>.
+
+✔️ ESTRUCTURA LÓGICA DEL CÓDIGO (DENTRO DEL MISMO HTML)
+
+Organiza el código como si fuera un proyecto así (pero todo dentro de un archivo único):
+
+metodos_numericos/
+    trapecio()
+    simpson13()
+    simpson38()
+
+interfaz/
+    inputs
+    contenedor de gráfica
+    estilos en <style>

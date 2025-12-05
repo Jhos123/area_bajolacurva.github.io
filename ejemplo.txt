@@ -1,0 +1,174 @@
+✅ ÁREAS DONDE SE USA INTEGRACIÓN NUMÉRICA (Y TU CALCULADORA SIRVE)
+🌱 1. Agronomía
+
+Porque muchas cosas dependen de curvas en el tiempo.
+
+Crecimiento de plantas
+
+Rendimiento de cultivos
+
+Consumo de agua
+
+Fotosíntesis acumulada
+
+Temperatura o humedad acumulada
+
+Modelos logísticos de crecimiento
+
+Funciones típicas:
+a + b*x, a + b*x - c*x^2, a/(1 + e^{-kx}), etc.
+
+⚡ 2. Electricidad y energía
+
+Toda energía acumulada es una integral.
+
+Energía consumida ∫P(t) dt
+
+Potencia variable en el tiempo
+
+Cargas eléctricas
+
+Curvas de demanda energética
+
+Sistemas solares
+
+Funciones típicas:
+500 + 100*sin(0.5*x), 1000*exp(-0.2*x), etc.
+
+💰 3. Economía y finanzas
+
+El ingreso total es un área bajo la curva.
+
+Flujo de caja
+
+Ganancias acumuladas
+
+Crecimiento de ventas
+
+Modelos de oferta/demanda
+
+Funciones estacionales
+
+Funciones típicas:
+2000 + 500*sin(0.3*x)
+a*exp(b*x)
+
+🚗 4. Transporte y movimiento
+
+La integral es distancia:
+
+∫
+𝑣
+(
+𝑡
+)
+ 
+𝑑
+𝑡
+∫v(t)dt
+
+Cálculo de distancia recorrida
+
+Velocidad variable
+
+Frenado, aceleración
+
+Consumo de combustible
+
+Funciones típicas:
+20 + 5*sin(0.2*x)
+3*x^2 + 2*x + 1
+
+🔬 5. Medicina y farmacología
+
+La integral es concentración acumulada.
+
+Dosis acumulada en sangre
+
+Eliminación/excreción
+
+Curvas de absorción de medicamento
+
+Efecto farmacodinámico
+
+Funciones típicas:
+50*exp(-0.1*x)
+a*e^(-b*x) + c
+
+🏗️ 6. Ingeniería mecánica
+
+Trabajo y energía:
+
+𝑊
+=
+∫
+𝐹
+(
+𝑥
+)
+ 
+𝑑
+𝑥
+W=∫F(x)dx
+
+Trabajo mecánico
+
+Fuerza variable
+
+Sistemas amortiguados
+
+Vibraciones
+
+Funciones típicas:
+100 + 20*sin(3*x)
+k*x
+
+🛰️ 7. Ingeniería aeroespacial
+
+Curvas de velocidad
+
+Consumo de combustible
+
+Carga aerodinámica
+
+Modelos atmosféricos
+
+🌊 8. Ingeniería civil / hidráulica
+
+Caudal acumulado
+
+Volumen de agua
+
+Hidrogramas
+
+Sedimentación
+
+Funciones típicas:
+200 + 30*sin(0.1*x)
+
+🔥 9. Climatología y medio ambiente
+
+Temperatura acumulada
+
+Radiación solar
+
+Índices ambientales
+
+Ciclos estacionales
+
+🎮 10. Simulación y videojuegos
+
+Movimiento cuadrático
+
+Trayectorias físicas
+
+Curvas de energía
+
+Velocidad variable
+
+🧠 Conclusión
+
+✔ Tu calculadora es universal
+✔ Sirve para cualquier ciencia donde haya una curva
+✔ El usuario solo cambia la función f(x)
+✔ Los métodos numéricos funcionan igual para cualquier área

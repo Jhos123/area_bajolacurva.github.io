@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Integración Numérica</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Calculadora de Integración Numérica</h1>
+            <p class="subtitle">Métodos Numéricos - Estilo Neón</p>
+        </header>
+        
+        <div class="main-grid">
+            <!-- Panel Izquierdo: Controles -->
+            <div class="panel-left">
+                <div class="input-group">
+                    <label for="funcion">Función f(x)</label>
+                    <input type="text" id="funcion" placeholder="Ej: x^2, sin(x), exp(x)">
+                </div>
+                
+                <div class="input-group">
+                    <label for="limiteA">Límite inferior (a)</label>
+                    <input type="number" id="limiteA" step="any" placeholder="0">
+                </div>
+                
+                <div class="input-group">
+                    <label for="limiteB">Límite superior (b)</label>
+                    <input type="number" id="limiteB" step="any" placeholder="2">
+                </div>
+                
+                <div class="input-group">
+                    <label for="subdivisiones">Subdivisiones (n)</label>
+                    <input type="number" id="subdivisiones" min="1" step="1" placeholder="10">
+                </div>
+                
+                <div class="input-group">
+                    <label for="metodo">Método numérico</label>
+                    <select id="metodo">
+                        <option value="trapecio">Trapecio</option>
+                        <option value="simpson13">Simpson 1/3</option>
+                        <option value="simpson38">Simpson 3/8</option>
+                    </select>
+                </div>
+                
+                <button id="calcularBtn" class="btn-calcular">
+                    <span class="btn-text">CALCULAR INTEGRAL</span>
+                    <span class="btn-glow"></span>
+                </button>
+                
+                <div id="resultado" class="resultado-box">
+                    <div class="resultado-label">RESULTADO</div>
+                    <div id="resultadoValor" class="resultado-valor">---</div>
+                    <div id="errorMsg" class="error-msg"></div>
+                </div>
+            </div>
+            
+            <!-- Panel Derecho: Gráfica y Documentación -->
+            <div class="panel-right">
+                <div class="grafica-container">
+                    <canvas id="grafica"></canvas>
+                </div>
+                
+                <!-- Documentación Expandida -->
+                <div class="documentacion-expandida">
+                    <div class="doc-header">
+                        <h2>📖 DOCUMENTACIÓN COMPLETA</h2>
+                    </div>
+                    
+                    <div class="doc-content" id="docContent">
+                        <div class="doc-section">
+                            <h3>🎯 MÉTODO SELECCIONADO</h3>
+                            <div id="metodoInfo" class="metodo-info">
+                                <p>Selecciona un método y presiona CALCULAR para ver la explicación detallada.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="doc-section">
+                            <h3>📊 INTERPRETACIÓN DEL GRÁFICO</h3>
+                            <div id="graficoInfo" class="grafico-info">
+                                <p>El gráfico mostrará:</p>
+                                <ul>
+                                    <li><span class="color-cyan">■</span> <strong>Curva f(x)</strong> - La función que ingresaste</li>
+                                    <li><span class="color-magenta">■</span> <strong>Área sombreada</strong> - Región a calcular</li>
+                                    <li><span class="color-magenta">●</span> <strong>Puntos de subdivisión</strong> - Donde se evalúa la función</li>
+                                </ul>
+                                <p id="graficoDetalle"></p>
+                            </div>
+                        </div>
+                        
+                        <div class="doc-section">
+                            <h3>💡 EJEMPLOS PRÁCTICOS</h3>
+                            <div class="ejemplos-grid">
+                                <div class="ejemplo-card" onclick="cargarEjemplo('x^2', 0, 2, 10, 'simpson13')">
+                                    <div class="ejemplo-titulo">Parábola Simple</div>
+                                    <div class="ejemplo-formula">f(x) = x²</div>
+                                    <div class="ejemplo-intervalo">[0, 2] • n=10</div>
+                                    <div class="ejemplo-metodo">Simpson 1/3</div>
+                                </div>
+                                
+                                <div class="ejemplo-card" onclick="cargarEjemplo('sin(x)', 0, 3.14159, 12, 'simpson13')">
+                                    <div class="ejemplo-titulo">Seno</div>
+                                    <div class="ejemplo-formula">f(x) = sin(x)</div>
+                                    <div class="ejemplo-intervalo">[0, π] • n=12</div>
+                                    <div class="ejemplo-metodo">Simpson 1/3</div>
+                                </div>
+                                
+                                <div class="ejemplo-card" onclick="cargarEjemplo('exp(-x^2)', -2, 2, 20, 'trapecio')">
+                                    <div class="ejemplo-titulo">Gaussiana</div>
+                                    <div class="ejemplo-formula">f(x) = e^(-x²)</div>
+                                    <div class="ejemplo-intervalo">[-2, 2] • n=20</div>
+                                    <div class="ejemplo-metodo">Trapecio</div>
+                                </div>
+                                
+                                <div class="ejemplo-card" onclick="cargarEjemplo('1/(1+x^2)', -5, 5, 30, 'simpson38')">
+                                    <div class="ejemplo-titulo">Lorentziana</div>
+                                    <div class="ejemplo-formula">f(x) = 1/(1+x²)</div>
+                                    <div class="ejemplo-intervalo">[-5, 5] • n=30</div>
+                                    <div class="ejemplo-metodo">Simpson 3/8</div>
+                                </div>
+                                
+                                <div class="ejemplo-card" onclick="cargarEjemplo('sqrt(1-x^2)', 0, 1, 12, 'simpson13')">
+                                    <div class="ejemplo-titulo">Semicírculo</div>
+                                    <div class="ejemplo-formula">f(x) = √(1-x²)</div>
+                                    <div class="ejemplo-intervalo">[0, 1] • n=12</div>
+                                    <div class="ejemplo-metodo">Simpson 1/3</div>
+                                </div>
+                                
+                                <div class="ejemplo-card" onclick="cargarEjemplo('cos(x)*exp(-x)', 0, 5, 15, 'simpson38')">
+                                    <div class="ejemplo-titulo">Oscilación Amortiguada</div>
+                                    <div class="ejemplo-formula">f(x) = cos(x)·e^(-x)</div>
+                                    <div class="ejemplo-intervalo">[0, 5] • n=15</div>
+                                    <div class="ejemplo-metodo">Simpson 3/8</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="doc-section">
+                            <h3>📐 FÓRMULAS DE LOS MÉTODOS</h3>
+                            <div class="formula-container">
+                                <div class="formula-box">
+                                    <h4>TRAPECIO</h4>
+                                    <div class="formula">I ≈ (h/2) × [f(x₀) + 2f(x₁) + 2f(x₂) + ... + 2f(xₙ₋₁) + f(xₙ)]</div>
+                                    <div class="formula-desc">donde h = (b-a)/n</div>
+                                </div>
+                                
+                                <div class="formula-box">
+                                    <h4>SIMPSON 1/3</h4>
+                                    <div class="formula">I ≈ (h/3) × [f(x₀) + 4f(x₁) + 2f(x₂) + 4f(x₃) + ... + f(xₙ)]</div>
+                                    <div class="formula-desc">Requiere n PAR</div>
+                                </div>
+                                
+                                <div class="formula-box">
+                                    <h4>SIMPSON 3/8</h4>
+                                    <div class="formula">I ≈ (3h/8) × [f(x₀) + 3f(x₁) + 3f(x₂) + 2f(x₃) + ... + f(xₙ)]</div>
+                                    <div class="formula-desc">Requiere n múltiplo de 3</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="doc-section">
+                            <h3>⚙️ SINTAXIS DE FUNCIONES</h3>
+                            <div class="sintaxis-tabla">
+                                <div class="sintaxis-row">
+                                    <span class="sintaxis-op">Potencias</span>
+                                    <span class="sintaxis-ejemplo">x^2, x^3, x^0.5</span>
+                                </div>
+                                <div class="sintaxis-row">
+                                    <span class="sintaxis-op">Trigonométricas</span>
+                                    <span class="sintaxis-ejemplo">sin(x), cos(x), tan(x)</span>
+                                </div>
+                                <div class="sintaxis-row">
+                                    <span class="sintaxis-op">Exponencial</span>
+                                    <span class="sintaxis-ejemplo">exp(x), e^x</span>
+                                </div>
+                                <div class="sintaxis-row">
+                                    <span class="sintaxis-op">Logaritmo</span>
+                                    <span class="sintaxis-ejemplo">log(x), ln(x)</span>
+                                </div>
+                                <div class="sintaxis-row">
+                                    <span class="sintaxis-op">Raíz</span>
+                                    <span class="sintaxis-ejemplo">sqrt(x)</span>
+                                </div>
+                                <div class="sintaxis-row">
+                                    <span class="sintaxis-op">Valor absoluto</span>
+                                    <span class="sintaxis-ejemplo">abs(x)</span>
+                                </div>
+                                <div class="sintaxis-row">
+                                    <span class="sintaxis-op">Constantes</span>
+                                    <span class="sintaxis-ejemplo">pi, e</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="doc-section">
+                            <h3>🎓 COMPARACIÓN DE MÉTODOS</h3>
+                            <table class="comparacion-tabla">
+                                <thead>
+                                    <tr>
+                                        <th>Método</th>
+                                        <th>Precisión</th>
+                                        <th>Error</th>
+                                        <th>Restricción</th>
+                                        <th>Uso recomendado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Trapecio</td>
+                                        <td>★★☆☆☆</td>
+                                        <td>O(h²)</td>
+                                        <td>Ninguna</td>
+                                        <td>Funciones lineales</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Simpson 1/3</td>
+                                        <td>★★★★☆</td>
+                                        <td>O(h⁴)</td>
+                                        <td>n par</td>
+                                        <td>Funciones suaves</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Simpson 3/8</td>
+                                        <td>★★★★★</td>
+                                        <td>O(h⁴)</td>
+                                        <td>n múltiplo de 3</td>
+                                        <td>Alta curvatura</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    
+    <!-- Math.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.2.1/math.min.js"></script>
+    
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
